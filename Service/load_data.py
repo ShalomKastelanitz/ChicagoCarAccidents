@@ -5,8 +5,10 @@ from database.connect import accidents,injuries
 from Repository.load_data_to_db import insertManyDocuments
 
 def parse_date(date_str: str):
+    # חותך את המחרוזת של התאריך כך שתכלול רק את החלק של התאריך
+    date_str = date_str.split(' ')[0]  # לוקח רק את החלק הראשון, כלומר את התאריך בלבד
     date_format = '%m/%d/%Y'  # פורמט של תאריך בלבד
-    return datetime.strptime(date_str, date_format).date()
+    return datetime.strptime(date_str, date_format)
 
 # נרמול הנתונים עם הפרטים החשובים בלבד
 def normalize_data(csv_file):
