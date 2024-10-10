@@ -19,8 +19,11 @@ def get_accidents_by_area_and_period():
     return jsonify({"area": area, "total_accidents": total_accidents})
 
 # תאונות מקובצות לפי הסיבה העיקרית לתאונה
-@accidents_bp.route("/accidents/total_by_cause", methods=["GET"])
-def get_accidents_by_cause():
-    cause = request.args.get("cause")
-    accidents = repo.get_accidents_by_cause(cause)
-    return jsonify(accidents)
+@accidents_bp.route("/accidents/grouped_by_cause", methods=["GET"])
+def get_accidents_grouped_by_cause():
+    street_name = request.args.get("street_name")  # לדוגמה: Main St
+
+    # שליפת הנתונים מהפונקציה ב-repo
+    accidents_grouped_by_cause = repo.get_accidents_grouped_by_cause(street_name)
+
+    return jsonify(accidents_grouped_by_cause)
